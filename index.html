@@ -326,17 +326,17 @@
     btn.disabled = true;
 
     try {
+      const fd = new FormData();
+      fd.append('firstName', firstName);
+      fd.append('lastName', lastName);
+      fd.append('email', email);
+      fd.append('phone', phone);
+      fd.append('message', message);
+
       await fetch('https://services.leadconnectorhq.com/hooks/fvBWKs3nL1HkBPZUKboX/webhook-trigger/81b84890-e9ec-46ab-be1d-d9fc47bfe28f', {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phone,
-          message
-        })
+        body: fd
       });
     } catch(e) {
       // Still show success even if webhook fails — don't block the user
